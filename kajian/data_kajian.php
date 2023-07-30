@@ -45,7 +45,9 @@
             $b['foto_kajian'] = $foto_kajian;
             $b['jam_start_kajian'] = $jam_start_kajian; 
             $b['jam_end_kajian'] = $jam_end_kajian; 
-            $b['tgl_kajian'] = $tgl_kajian;            
+            $b['tgl_kajian'] = $tgl_kajian;      
+            $b['tgl_kajian_help'] = date("d-M-Y",strtotime($tgl_kajian));      
+              
 
             array_push($result, $b);
 
