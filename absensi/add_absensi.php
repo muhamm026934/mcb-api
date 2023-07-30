@@ -12,18 +12,12 @@
         @$id_absensi = $_POST['id_absensi'];
         @$id_kajian = $_POST['id_kajian'];
         @$id_user = $_POST['id_user'];
-        @$jam_start_kajian = $_POST['jam_start_kajian'];
-        @$jam_end_kajian = $_POST['jam_end_kajian'];
-        @$tgl_kajian = $_POST['tgl_kajian'];
         @$datetime_absen = $_POST['datetime_absen'];
 
         @$data_absensi = $data->data_absensi(
             @$id_absensi,
             @$id_kajian,
             @$id_user,
-            @$jam_start_kajian,
-            @$jam_end_kajian,
-            @$tgl_kajian,
             @$datetime_absen
         );
 
@@ -34,15 +28,6 @@
         }elseif($id_user == "" || $id_user == null){
             $response["value"] = "0";
             $response["message"] = "Anda Belum Login !";
-        }elseif($tgl_kajian == "" || $tgl_kajian == null){
-            $response["value"] = "0";
-            $response["message"] = "Pilih Tanggal Kajian !";
-        }elseif($jam_start_kajian == "" || $jam_start_kajian == null){
-            $response["value"] = "0";
-            $response["message"] = "Pilih Jam Mulai Kajian !";
-        }elseif($jam_end_kajian == "" || $jam_end_kajian == null){
-            $response["value"] = "0";
-            $response["message"] = "Pilih Jam Selesai Kajian !";
         }elseif(isset($row_absensi)){
             $response["value"] = "0";
             $response["message"] = "Data Kajian Sudah Ada";

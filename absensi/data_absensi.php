@@ -11,18 +11,12 @@
         @$id_absensi = $_POST['id_absensi'];
         @$id_kajian = $_POST['id_kajian'];
         @$id_user = $_POST['id_user'];
-        @$jam_start_kajian = $_POST['jam_start_kajian'];
-        @$jam_end_kajian = $_POST['jam_end_kajian'];
-        @$tgl_kajian = $_POST['tgl_kajian'];
         @$datetime_absen = $_POST['datetime_absen'];
 
         @$data_absensi = $data->data_absensi(
             @$id_absensi,
             @$id_kajian,
             @$id_user,
-            @$jam_start_kajian,
-            @$jam_end_kajian,
-            @$tgl_kajian,
             @$datetime_absen
         ); 
 
@@ -31,33 +25,27 @@
                 $id_absensi = $row_absensi->id_absensi;
                 $id_kajian = $row_absensi->id_kajian;
                 $id_user = $row_absensi->id_user;
-                $jam_start_kajian = $row_absensi->jam_start_kajian;
-                $jam_end_kajian = $row_absensi->jam_end_kajian;
-                $tgl_kajian = $row_absensi->tgl_kajian;
                 $datetime_absen = $row_absensi->datetime_absen;
 
                 }else{
                 $id_absensi = "";	
                 $id_kajian = "";	
                 $id_user = "";
-                $jam_start_kajian = "";	
-                $jam_end_kajian = "";	
-                $tgl_kajian = "";  
                 $datetime_absen = "";                
                 }
             $b['id_absensi'] = $id_absensi; 
             $b['id_kajian'] = $id_kajian; 
             $b['id_user'] = $id_user;
-            $b['jam_start_kajian'] = $jam_start_kajian; 
-            $b['jam_end_kajian'] = $jam_end_kajian; 
-            $b['tgl_kajian'] = $tgl_kajian; 
             $b['datetime_absen'] = $datetime_absen;             
 
 
             @$data_kajian = $data->data_kajian(
                 @$id_kajian,
                 @$nm_kajian,
-                @$foto_kajian
+                @$foto_kajian,
+                @$jam_start_kajian,
+                @$jam_end_kajian,
+                @$tgl_kajian   
             ); 
     
                 $row_kajian = $data_kajian->fetch_object();
@@ -65,17 +53,24 @@
                     $id_kajian = $row_kajian->id_kajian;
                     $nm_kajian = $row_kajian->nm_kajian;
                     $foto_kajian = $row_kajian->foto_kajian;
+                    $jam_start_kajian = $row_kajian->jam_start_kajian;
+                    $jam_end_kajian = $row_kajian->jam_end_kajian;
+                    $tgl_kajian = $row_kajian->tgl_kajian;
     
                     }else{
                     $id_kajian = "";	
                     $nm_kajian = "";	
                     $foto_kajian = "";
+                    $jam_start_kajian = "";	
+                    $jam_end_kajian = "";	
+                    $tgl_kajian = "";                       
                     }
                 $b['id_kajian'] = $id_kajian; 
                 $b['nm_kajian'] = $nm_kajian; 
                 $b['foto_kajian'] = $foto_kajian;
-
-
+                $b['jam_start_kajian'] = $jam_start_kajian; 
+                $b['jam_end_kajian'] = $jam_end_kajian; 
+                $b['tgl_kajian'] = $tgl_kajian;     
                 
             array_push($result, $b);
 

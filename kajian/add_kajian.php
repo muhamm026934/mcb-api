@@ -13,6 +13,9 @@
         @$file_tmp = $_FILES['files']['tmp_name'];
         @$id_kajian = $_POST['id_kajian'];
         @$nm_kajian = $_POST['nm_kajian'];
+        @$jam_start_kajian = $_POST['jam_start_kajian'];
+        @$jam_end_kajian = $_POST['jam_end_kajian'];
+        @$tgl_kajian = $_POST['tgl_kajian'];        
 
         $temp = explode(".", @$file);
         $foto_kajian = @$nm_kajian . '.' . end($temp);
@@ -21,7 +24,10 @@
         @$data_kajian = $data->data_kajian(
             @$id_kajian,
             @$nm_kajian,
-            @$foto_kajian
+            @$foto_kajian,
+            @$jam_start_kajian,
+            @$jam_end_kajian,
+            @$tgl_kajian              
         );
         @$row_kajian = $data_kajian->fetch_object();
         if (@$nm_kajian == "") {
@@ -30,6 +36,15 @@
         }elseif($file == "" || $file == null){
             $response["value"] = "0";
             $response["message"] = "Foto Harus Diupload";
+        }elseif($tgl_kajian == "" || $tgl_kajian == null){
+            $response["value"] = "0";
+            $response["message"] = "Tanggal Kajian Harus Diisi";
+        }elseif($jam_start_kajian == "" || $jam_start_kajian == null){
+            $response["value"] = "0";
+            $response["message"] = "Jam Mulai Kajian Harus Diisi";
+        }elseif($jam_end_kajian == "" || $jam_end_kajian == null){
+            $response["value"] = "0";
+            $response["message"] = "Jam Selesai Kajian Harus Diisi";
         }elseif(isset($row_kajian)){
             $response["value"] = "0";
             $response["message"] = "Data Kajian Sudah Ada";
@@ -37,7 +52,10 @@
             @$add_kajian = $data->add_kajian(
                 @$id_kajian,
                 @$nm_kajian,
-                @$foto_kajian
+                @$foto_kajian,
+                @$jam_start_kajian,
+                @$jam_end_kajian,
+                @$tgl_kajian                   
             );
             if ($add_kajian) {
                 $response["value"] = "1";

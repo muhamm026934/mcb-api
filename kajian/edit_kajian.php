@@ -13,19 +13,27 @@
         @$file_tmp = $_FILES['files']['tmp_name'];
         @$id_kajian = $_POST['id_kajian'];
         @$nm_kajian = $_POST['nm_kajian'];
-
+        @$jam_start_kajian = $_POST['jam_start_kajian'];
+        @$jam_end_kajian = $_POST['jam_end_kajian'];
+        @$tgl_kajian = $_POST['tgl_kajian'];  
 
         
 
         @$data_kajian = $data->data_kajian(
             @$id_kajian,
             @$nm_kajian,
-            @$foto_kajian
+            @$foto_kajian,
+            @$jam_start_kajian,
+            @$jam_end_kajian,
+            @$tgl_kajian                
         );
         @$row_kajian = $data_kajian->fetch_object();
         @$id_kajian_help = $row_kajian->id_kajian;
         @$nm_kajian_help = $row_kajian->nm_kajian;
         @$foto_kajian_help = $row_kajian->foto_kajian;
+        @$jam_start_kajian_help = $row_kajian->jam_start_kajian;
+        @$jam_end_kajian_help = $row_kajian->jam_end_kajian;
+        @$tgl_kajian_help = $row_kajian->tgl_kajian;
         
         if (@$file != null) {
             $temp = explode(".", @$file);
@@ -44,7 +52,10 @@
             @$edit_kajian = $data->edit_kajian(
                 @$id_kajian,
                 @$nm_kajian,
-                @$foto_kajian
+                @$foto_kajian,
+                @$jam_start_kajian,
+                @$jam_end_kajian,
+                @$tgl_kajian                
             );
             if ($edit_kajian) {
                 $response["value"] = "1";

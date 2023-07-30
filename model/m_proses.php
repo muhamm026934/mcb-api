@@ -150,7 +150,10 @@
         public function add_kajian(
             $id_kajian = null,
             $nm_kajian = null,
-            $foto_kajian = null
+            $foto_kajian = null,
+            $jam_start_kajian = null,
+            $jam_end_kajian = null,
+            $tgl_kajian = null            
             ){
     
             $db = $this->mysqli->conf;
@@ -161,7 +164,10 @@
             $sql.= " SET 
             id_kajian = '',
             nm_kajian = '$nm_kajian',
-            foto_kajian = '$foto_kajian'
+            foto_kajian = '$foto_kajian',
+            jam_start_kajian = '$jam_start_kajian',
+            jam_end_kajian = '$jam_end_kajian',
+            tgl_kajian = '$tgl_kajian'
             ";		
             
             $query = $db->query($sql) or die($db->error);
@@ -170,7 +176,10 @@
         public function data_kajian(
             $id_kajian = null,
             $nm_kajian = null,
-            $foto_kajian = null
+            $foto_kajian = null,
+            $jam_start_kajian = null,
+            $jam_end_kajian = null,
+            $tgl_kajian = null               
             ){
             $db = $this->mysqli->conf;
             $table = $this->tb_kajian;
@@ -183,6 +192,8 @@
                 $sql.= " WHERE nm_kajian = '$nm_kajian' ";
             }elseif (@$foto_kajian != null || @$foto_kajian != "") {
                 $sql.= " WHERE foto_kajian = '$foto_kajian' ";
+            }elseif (@$tgl_kajian != null || @$tgl_kajian != "") {
+                $sql.= " WHERE tgl_kajian = '$tgl_kajian' ";
             }else {
                 $sql.= " ORDER BY nm_kajian ASC";
             }
@@ -192,7 +203,10 @@
         public function edit_kajian(
             $id_kajian = null,
             $nm_kajian = null,
-            $foto_kajian = null
+            $foto_kajian = null,
+            $jam_start_kajian = null,
+            $jam_end_kajian = null,
+            $tgl_kajian = null               
             ){
 
             $db = $this->mysqli->conf;
@@ -202,7 +216,10 @@
             $sql.= $table;
             $sql.= " SET 
             nm_kajian = '$nm_kajian',
-            foto_kajian = '$foto_kajian'
+            foto_kajian = '$foto_kajian',
+            jam_start_kajian = '$jam_start_kajian',
+            jam_end_kajian = '$jam_end_kajian',
+            tgl_kajian = '$tgl_kajian'            
             WHERE id_kajian = '$id_kajian'
             ";		
             
@@ -212,7 +229,10 @@
         public function delete_kajian(
             $id_kajian = null,
             $nm_kajian = null,
-            $foto_kajian = null
+            $foto_kajian = null,
+            $jam_start_kajian = null,
+            $jam_end_kajian = null,
+            $tgl_kajian = null               
             ){
 
             $db = $this->mysqli->conf;
@@ -233,9 +253,6 @@
             $id_absensi = null,
             $id_kajian = null,
             $id_user = null,
-            $jam_start_kajian = null,
-            $jam_end_kajian = null,
-            $tgl_kajian = null,
             $datetime_absen = null
             ){
     
@@ -247,10 +264,7 @@
             $sql.= " SET 
             id_absensi = '',
             id_kajian = '$id_kajian',
-            id_user = '$id_user',
-            jam_start_kajian = '$jam_start_kajian',
-            jam_end_kajian = '$jam_end_kajian',
-            tgl_kajian = '$tgl_kajian',
+            id_user = '$id_user'
             datetime_absen = '$datetime_absen'
             ";		
             
@@ -262,9 +276,6 @@
             $id_absensi = null,
             $id_kajian = null,
             $id_user = null,
-            $jam_start_kajian = null,
-            $jam_end_kajian = null,
-            $tgl_kajian = null,
             $datetime_absen = null
             ){
             $db = $this->mysqli->conf;
@@ -278,10 +289,8 @@
                 $sql.= " WHERE id_kajian = '$id_kajian' ";
             }elseif (@$id_user != null || @$id_user != "") {
                 $sql.= " WHERE id_user = '$id_user' ";
-            }elseif (@$tgl_kajian != null || @$tgl_kajian != "") {
-                $sql.= " WHERE tgl_kajian = '$tgl_kajian' ";
             }else {
-                $sql.= " ORDER BY tgl_kajian ASC";
+                $sql.= " ORDER BY id_kajian ASC";
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
@@ -291,9 +300,6 @@
             $id_absensi = null,
             $id_kajian = null,
             $id_user = null,
-            $jam_start_kajian = null,
-            $jam_end_kajian = null,
-            $tgl_kajian = null,
             $datetime_absen = null
             ){
 
@@ -305,9 +311,6 @@
             $sql.= " SET 
             id_kajian = '$id_kajian',
             id_user = '$id_user',
-            jam_start_kajian = '$jam_start_kajian',
-            jam_end_kajian = '$jam_end_kajian',
-            tgl_kajian = '$tgl_kajian',
             datetime_absen = '$datetime_absen'
             WHERE id_absensi = '$id_absensi'
             ";		
@@ -320,9 +323,6 @@
             $id_absensi = null,
             $id_kajian = null,
             $id_user = null,
-            $jam_start_kajian = null,
-            $jam_end_kajian = null,
-            $tgl_kajian = null,
             $datetime_absen = null
             ){
 

@@ -12,7 +12,10 @@
             @$delete_kajian = $data->delete_kajian(
                 @$id_kajian,
                 @$nm_kajian,
-                @$foto_kajian
+                @$foto_kajian,
+                @$jam_start_kajian,
+                @$jam_end_kajian,
+                @$tgl_kajian                    
             );
                            
                 if (@$delete_kajian) {
