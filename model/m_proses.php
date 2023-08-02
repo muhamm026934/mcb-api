@@ -264,7 +264,7 @@
             $sql.= " SET 
             id_absensi = '',
             id_kajian = '$id_kajian',
-            id_user = '$id_user'
+            id_user = '$id_user',
             datetime_absen = '$datetime_absen'
             ";		
             
@@ -294,7 +294,27 @@
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
-        }        
+        }   
+        
+        public function data_absensi_cek(
+            $id_absensi = null,
+            $id_kajian = null,
+            $id_user = null,
+            $datetime_absen = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_absensi;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_kajian != "" || @$id_user != "") {
+                $sql.= " WHERE id_kajian = '$id_kajian' AND id_user = '$id_user' ";
+            }else {
+                $sql.= " ORDER BY id_kajian ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }          
 
         public function edit_absensi(
             $id_absensi = null,

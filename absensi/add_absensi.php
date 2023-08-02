@@ -30,24 +30,21 @@
             $response["message"] = "Anda Belum Login !";
         }elseif(isset($row_absensi)){
             $response["value"] = "0";
-            $response["message"] = "Data Kajian Sudah Ada";
+            $response["message"] = "Anda Sudah Absen !";
         }else {
             @$add_absensi = $data->add_absensi(
                 @$id_absensi,
                 @$id_kajian,
                 @$id_user,
-                @$jam_start_kajian,
-                @$jam_end_kajian,
-                @$tgl_kajian,
                 @$datetime_absen
             );
             if ($add_absensi) {
                 $response["value"] = "1";
-                $response["message"] = "Tambah Data Absensi Berhasil";
+                $response["message"] = "Absensi Berhasil";
                 
             }else{
                 $response["value"] = "0";
-                $response["message"] = "Tambah Data Absensi Gagal";
+                $response["message"] = "Absensi Gagal";
             }                  
         }
         array_push($result, $response);  
