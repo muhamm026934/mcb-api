@@ -189,7 +189,7 @@
             if (@$id_kajian != null || @$id_kajian != "") {
                 $sql.= " WHERE id_kajian = '$id_kajian' ";
             }elseif (@$nm_kajian != null || @$nm_kajian != "") {
-                $sql.= " WHERE nm_kajian = '$nm_kajian' ";
+                $sql.= " WHERE nm_kajian LIKE '%$nm_kajian%' ";
             }elseif (@$foto_kajian != null || @$foto_kajian != "") {
                 $sql.= " WHERE foto_kajian = '$foto_kajian' ";
             }elseif (@$tgl_kajian != null || @$tgl_kajian != "") {
