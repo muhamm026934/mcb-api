@@ -15,9 +15,19 @@
         @$nm_kajian = $_POST['nm_kajian'];
         @$jam_start_kajian = $_POST['jam_start_kajian'];
         @$jam_end_kajian = $_POST['jam_end_kajian'];
-        @$tgl_kajian = $_POST['tgl_kajian'];  
+        @$tgl_kajian = $_POST['tgl_kajian'];
+        @$datetimes_now = $_POST['datetime_now'];
 
-        
+        $replaces = array("-", ":", " ");
+        @$waktu_kajian_awal_help = $tgl_kajian.$jam_start_kajian."00";
+        @$waktu_kajian_awal = str_replace($replaces,'',@$waktu_kajian_awal_help);
+        @$waktu_kajian_akhir_help = $tgl_kajian.$jam_end_kajian."00";
+        @$waktu_kajian_akhir = str_replace($replaces,'',@$waktu_kajian_akhir_help);
+        @$datetimes_nows = str_replace($replaces,'',@$datetimes_now);
+
+        @$selisih_awal = @$datetimes_nows - @$waktu_kajian_awal;             
+        @$selisih_akhir = @$datetimes_nows - @$waktu_kajian_akhir;
+        @$selisih_akhir_awal =  @$waktu_kajian_awal - @$waktu_kajian_akhir;        
 
         @$data_kajian = $data->data_kajian(
             @$id_kajian,
@@ -48,6 +58,9 @@
         if (@$nm_kajian == "") {
             $response["value"] = "0";
             $response["message"] = "Nama Kajian Harus Diisi";  
+        }elseif(@$selisih_akhir_awal >= 0){
+            $response["value"] = "0";
+            $response["message"] = "Cek Tanggal Dan Waktu Pengajian !";
         }else {
             @$edit_kajian = $data->edit_kajian(
                 @$id_kajian,

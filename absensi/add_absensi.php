@@ -8,12 +8,11 @@
         $result = array();
         $data = new Proses_sql($connection);
 
-
         @$id_absensi = $_POST['id_absensi'];
         @$id_kajian = $_POST['id_kajian'];
         @$id_user = $_POST['id_user'];
         @$datetime_absen = $_POST['datetime_absen'];
-
+        
         @$data_absensi = $data->data_absensi_cek(
             @$id_absensi,
             @$id_kajian,

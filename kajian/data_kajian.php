@@ -14,6 +14,7 @@
         @$jam_end_kajian = $_POST['jam_end_kajian'];
         @$tgl_kajian = $_POST['tgl_kajian'];     
         @$id_user_absensi = $_POST['id_user'];  
+        @$datetimes_now = $_POST['datetime_now']; 
 
         @$data_kajian = $data->data_kajian(
             @$id_kajian,
@@ -34,13 +35,33 @@
                 $jam_end_kajian = $row_kajian->jam_end_kajian;
                 $tgl_kajian = $row_kajian->tgl_kajian;
 
+                $replaces = array("-", ":", " ");
+                @$waktu_kajian_awal_help = $tgl_kajian.$jam_start_kajian;
+                @$waktu_kajian_awal = str_replace($replaces,'',@$waktu_kajian_awal_help);
+                @$waktu_kajian_akhir_help = $tgl_kajian.$jam_end_kajian;
+                @$waktu_kajian_akhir = str_replace($replaces,'',@$waktu_kajian_akhir_help);
+                @$datetimes_nows = str_replace($replaces,'',@$datetimes_now);
+
+                @$selisih_awal = @$datetimes_nows-@$waktu_kajian_awal;             
+                @$selisih_akhir = @$datetimes_nows - @$waktu_kajian_akhir;
+
+
+                if (@$selisih_awal < 0) {
+                    @$notes = "Pengajian Belum Dimulai";
+                }elseif (@$selisih_akhir >= 0) {
+                    @$notes = "Pengajian Telah Berakhir";
+                }else{
+                    @$notes = "Silahkan Absen";
+                }
+
                 }else{
                 $id_kajian = "";	
                 $nm_kajian = "";	
                 $foto_kajian = "";
                 $jam_start_kajian = "";	
                 $jam_end_kajian = "";	
-                $tgl_kajian = "";                
+                $tgl_kajian = "";          
+                      
                 }
             $b['id_kajian'] = $id_kajian; 
             $b['nm_kajian'] = $nm_kajian; 
@@ -48,7 +69,14 @@
             $b['jam_start_kajian'] = $jam_start_kajian; 
             $b['jam_end_kajian'] = $jam_end_kajian; 
             $b['tgl_kajian'] = $tgl_kajian;      
-            $b['tgl_kajian_help'] = date("d-M-Y",strtotime($tgl_kajian));      
+            $b['tgl_kajian_help'] = date("d-M-Y",strtotime($tgl_kajian)); 
+            $b['datetime_now'] = $datetimes_nows; 
+            $b['waktu_kajian_awal'] = $waktu_kajian_awal; 
+            $b['waktu_kajian_akhir'] = $waktu_kajian_akhir;  
+            $b['selisih_awal'] = $selisih_awal; 
+            $b['selisih_akhir'] = $selisih_akhir;  
+            $b['notes'] = @$notes;     
+ 
              
             @$data_absensi_cek = $data->data_absensi_cek(
                 @$id_absensi,
